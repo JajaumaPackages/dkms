@@ -6,6 +6,7 @@ Summary:        Dynamic Kernel Module Support Framework
 License:        GPLv2+
 URL:            https://github.com/dell/dkms
 Source0:        https://github.com/dell/dkms/archive/2.3.tar.gz
+Patch0:         dkms-disable-weak-modules.patch
 BuildArch:      noarch
 BuildRequires:  systemd
 
@@ -37,6 +38,8 @@ when a new kernel is installed.
 
 %prep
 %setup -q
+# Let's pretend we never had that sort of functionality.
+%patch0 -p1 -b .disable-weak-modules
 
 
 %build
@@ -81,3 +84,4 @@ exit 0
 %changelog
 * Wed Sep 14 2016 Jajauma's Packages <jajauma@yandex.ru> - 2.3-1
 - Public release
+- Disable weak-modules completely

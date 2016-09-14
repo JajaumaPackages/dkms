@@ -1,0 +1,15 @@
+diff -uNr dkms-2.3.orig/dkms dkms-2.3/dkms
+--- dkms-2.3.orig/dkms	2016-09-14 19:16:56.854589841 +0300
++++ dkms-2.3/dkms	2016-09-14 19:17:35.694186066 +0300
+@@ -3625,8 +3625,9 @@
+ last_mvka_conf=''
+ try_source_tree=''
+ die_is_fatal="yes"
+-[ -x /sbin/weak-modules ] && weak_modules='/sbin/weak-modules'
+-[ -x /usr/lib/module-init-tools/weak-modules ] && weak_modules='/usr/lib/module-init-tools/weak-modules'
++# Pretend we have no weak modules at all.
++# [ -x /sbin/weak-modules ] && weak_modules='/sbin/weak-modules'
++# [ -x /usr/lib/module-init-tools/weak-modules ] && weak_modules='/usr/lib/module-init-tools/weak-modules'
+ no_depmod=""
+ 
+ action_re='^(remove|(auto|un)?install|match|mk(driverdisk|tarball|rpm|deb|dsc|kmp)|build|add|status|ldtarball)$'
