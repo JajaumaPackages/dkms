@@ -1,12 +1,13 @@
 Name:           dkms
 Version:        2.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Dynamic Kernel Module Support Framework
 
 License:        GPLv2+
 URL:            https://github.com/dell/dkms
 Source0:        https://github.com/dell/dkms/archive/2.3.tar.gz
 Patch0:         dkms-disable-weak-modules.patch
+Patch1:         dkms-force-autoinstall.patch
 BuildArch:      noarch
 BuildRequires:  systemd
 
@@ -40,6 +41,8 @@ when a new kernel is installed.
 %setup -q
 # Let's pretend we never had that sort of functionality.
 %patch0 -p1 -b .disable-weak-modules
+# Don't try smart things
+%patch1 -p1 -b .force-autoinstall
 
 
 %build
@@ -82,6 +85,9 @@ exit 0
 
 
 %changelog
+* Sat Oct 15 2016 Jajauma's Packages <jajauma@yandex.ru> - 2.3-2
+- Pass --force to dkms autoinstall
+
 * Wed Sep 14 2016 Jajauma's Packages <jajauma@yandex.ru> - 2.3-1
 - Public release
 - Disable weak-modules completely

@@ -1,0 +1,24 @@
+diff -uNr dkms-2.3.orig/dkms_autoinstaller dkms-2.3/dkms_autoinstaller
+--- dkms-2.3.orig/dkms_autoinstaller	2016-10-15 13:08:26.222589355 +0300
++++ dkms-2.3/dkms_autoinstaller	2016-10-15 13:09:00.422732918 +0300
+@@ -46,7 +46,7 @@
+ 			kernel=`uname -r`
+ 		fi
+ 		log_daemon_msg "$prog: running auto installation service for kernel $kernel"
+-		dkms autoinstall --kernelver $kernel
++		dkms autoinstall --force --kernelver $kernel
+ 		log_end_msg $?
+ 		;;
+ 	stop|restart|force-reload|status|reload)
+diff -uNr dkms-2.3.orig/dkms.service dkms-2.3/dkms.service
+--- dkms-2.3.orig/dkms.service	2016-10-15 13:08:26.222589355 +0300
++++ dkms-2.3/dkms.service	2016-10-15 13:09:34.285884919 +0300
+@@ -5,7 +5,7 @@
+ [Service]
+ Type=oneshot
+ RemainAfterExit=true
+-ExecStart=/bin/sh -c 'dkms autoinstall --verbose --kernelver $(uname -r)'
++ExecStart=/bin/sh -c 'dkms autoinstall --force --verbose --kernelver $(uname -r)'
+ 
+ [Install]
+ WantedBy=multi-user.target
